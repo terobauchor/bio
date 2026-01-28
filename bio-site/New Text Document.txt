@@ -1,0 +1,14 @@
+bio-site/
+├── server.js
+├── database.db
+├── package.json
+├── /public
+│   ├── index.html
+│   ├── admin.html
+│   ├── style.css
+│   ├── admin.css
+│   ├── script.js
+│   └── /uploads
+│       ├── bg.mp4
+│       ├── music.mp3
+│       └── cursor.png

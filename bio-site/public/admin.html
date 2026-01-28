@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="panel">
+  <h2>Admin Panel</h2>
+
+  <input id="title" placeholder="Title">
+  <input id="username" placeholder="Username">
+  <input id="bio" placeholder="Bio">
+
+  <textarea id="links" placeholder='[{"name":"Discord","url":"https://..."}]'></textarea>
+
+  <input type="file" id="upload">
+  <button onclick="upload()">Upload File</button>
+
+  <input id="bgVideo" placeholder="BG Video URL">
+  <input id="music" placeholder="Music URL">
+  <input id="cursor" placeholder="Cursor URL">
+  <input id="favicon" placeholder="Favicon URL">
+
+  <button onclick="save()">Save</button>
+</div>
+
+<script>
+async function upload() {
+  const f = document.getElementById("upload").files[0];
+  const fd = new FormData();
+  fd.append("file", f);
+
+  const r = await fetch("/api/upload", {
+    method: "POST",
+    body: fd
+  });
+  alert("Uploaded");
+}
+
+async function save() {
+  await fetch("/api/config", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: title.value,
+      username: username.value,
+      bio: bio.value,
+      links: links.value,
+      bgVideo: bgVideo.value,
+      music: music.value,
+      cursor: cursor.value,
+      favicon: favicon.value
+    })
+  });
+  alert("Saved");
+}
+</script>
+
+</body>
+</html>
